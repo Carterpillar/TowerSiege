@@ -28,7 +28,7 @@ var B18
 
 
 function preload(){
-polygon=loadImage("polygon.png")
+polygon=loadImage("Untitled-removebg-preview.png")
 
 }
 function setup(){
@@ -57,11 +57,17 @@ s2=new Stand(1150,300,400,35)
  B16=new Block(1090,90,60,60)
  B17=new Block(1210,90,60,60)
  B18=new Block(1150,30,60,60)
+ pol=Bodies.circle(200,200,300)
+ World.add(world,pol)
+ s=new Slingshot(this.pol,{x:200,y:200})
 }
 function draw(){
 background("#39312F")
 Engine.update(engine)
-
+textSize(40)
+text("Press SpaceBar To Reset",50,100)
+textSize(40)
+text("This game has bugs so double click your mouse for easy mode",50,700)
 g.display();
 s1.display();
 s2.display();
@@ -86,5 +92,18 @@ B5.display()
  B16.display()
  B17.display()
  B18.display()
- 
+ imageMode(CENTER)
+ image(polygon,pol.position.x,pol.position.y,600,400)
+ s.display()
+}
+function mouseDragged(){
+Matter.Body.setPosition(this.pol,{x:mouseX,y:mouseY})
+}
+function mouseReleased(){
+s.fly()
+}
+function keyPressed(){
+if(keyCode==32){
+s.attach(this.pol)
+}
 }
